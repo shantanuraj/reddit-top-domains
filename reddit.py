@@ -40,9 +40,15 @@ reddit = praw.Reddit(
 
 subreddit = reddit.subreddit(subreddit_name)
 
+domain_blocklist = [
+    "reddit.com",
+    "redd.it",
+]
 domains = []
 for submission in subreddit.new(limit=limit):
     domain = urlparse(submission.url).netloc
+    if any(blocked in domain for blocked in domain_blocklist):
+        continue
     domains.append(domain)
 
 counter = Counter(domains)
