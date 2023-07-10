@@ -6,7 +6,7 @@ Script to fetch the top domains posted to sub-reddits.
 
 ```sh
 # r/Subreddit works as well
-python reddit.py Subreddit [limit]
+python reddit.py Subreddit [limit=1000] [count=10]
 ```
 
 Will log the 10 most common domains to the console and write the output

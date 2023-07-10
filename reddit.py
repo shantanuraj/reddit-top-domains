@@ -15,7 +15,7 @@ client_secret = os.getenv("CLIENT_SECRET")
 user_agent = os.getenv("USER_AGENT")
 
 if len(sys.argv) < 2:
-    print("Usage: python reddit.py <subreddit> [limit]")
+    print("Usage: python reddit.py <subreddit> [limit=1000] [count=10]")
     sys.exit(1)
 
 subreddit_name = sys.argv[1].replace("r/", "", 1)
@@ -26,6 +26,14 @@ if len(sys.argv) >= 3:
         limit = int(sys.argv[2])
     except ValueError:
         print("`limit` must be an integer")
+        sys.exit(1)
+
+count = 10
+if len(sys.argv) >= 4:
+    try:
+        count = int(sys.argv[3])
+    except ValueError:
+        print("`count` must be an integer")
         sys.exit(1)
 
 reddit = praw.Reddit(
@@ -43,4 +51,4 @@ for submission in subreddit.new(limit=limit):
 
 counter = Counter(domains)
 
-print(counter.most_common(10))
+print(counter.most_common(count))
