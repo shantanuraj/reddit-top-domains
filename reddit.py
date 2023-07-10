@@ -47,7 +47,7 @@ domain_blocklist = [
 domains = []
 for submission in subreddit.new(limit=limit):
     domain = urlparse(submission.url).netloc
-    if any(blocked in domain for blocked in domain_blocklist):
+    if not domain or any(blocked in domain for blocked in domain_blocklist):
         continue
     domains.append(domain)
 
