@@ -51,4 +51,9 @@ for submission in subreddit.new(limit=limit):
 
 counter = Counter(domains)
 
-print(counter.most_common(count))
+with open(f"{subreddit_name}-top-{count}.csv", "w") as f:
+    print("domain,count", file=f)
+    print(f"r/{subreddit_name} top {count} domains from last {limit} submissions:")
+    for domain, count in counter.most_common(count):
+        print(f"{domain}: {count}")
+        print(f"{domain},{count}", file=f)
