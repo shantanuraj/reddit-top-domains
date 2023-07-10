@@ -20,21 +20,17 @@ if len(sys.argv) < 2:
 
 subreddit_name = sys.argv[1].replace("r/", "", 1)
 
-limit = 1000
-if len(sys.argv) >= 3:
-    try:
-        limit = int(sys.argv[2])
-    except ValueError:
-        print("`limit` must be an integer")
-        sys.exit(1)
+def get_int_arg(arg_index, default):
+    if len(sys.argv) > arg_index:
+        try:
+            return int(sys.argv[arg_index])
+        except ValueError:
+            print(f"Argument {arg_index} must be an integer")
+            sys.exit(1)
+    return default
 
-count = 10
-if len(sys.argv) >= 4:
-    try:
-        count = int(sys.argv[3])
-    except ValueError:
-        print("`count` must be an integer")
-        sys.exit(1)
+limit = get_int_arg(2, 1000)
+count = get_int_arg(3, 10)
 
 reddit = praw.Reddit(
     client_id=client_id,
