@@ -43,6 +43,7 @@ subreddit = reddit.subreddit(subreddit_name)
 domain_blocklist = [
     "reddit.com",
     "redd.it",
+    "imgur.com",
 ]
 domains = []
 for submission in subreddit.new(limit=limit):
