@@ -46,7 +46,7 @@ domain_blocklist = [
     "imgur.com",
 ]
 domains = []
-for submission in subreddit.new(limit=limit):
+for submission in subreddit.hot(limit=limit):
     domain = urlparse(submission.url).netloc
     if not domain or any(blocked in domain for blocked in domain_blocklist):
         continue
